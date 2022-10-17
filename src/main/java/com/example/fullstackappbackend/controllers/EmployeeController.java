@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.ws.rs.core.Response;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +16,8 @@ import java.util.Map;
 // dizer que essa aplicação é um app cross-domain
 @CrossOrigin(origins = "http://localhost:4200")
 // dizer que essa classe será um restcontroller com a responsabilidade de fazer as requisicoes http
-@RestController("/api/v1")
+@RestController
+@RequestMapping("/api/v1")
 public class EmployeeController {
     @Autowired
     private EmployeeRepository employeeRepository;
@@ -25,7 +25,7 @@ public class EmployeeController {
     @Autowired
     private SequenceGeneratorService sequenceGeneratorService;
 
-    @GetMapping("/employess")
+    @GetMapping("/employees")
     public List<Employee> getAllEmployees() {
         return employeeRepository.findAll();
     }
@@ -38,13 +38,13 @@ public class EmployeeController {
             return ResponseEntity.ok().body(employee);
         }
 
-    @PostMapping("/employee")
+    @PostMapping("/employees")
     public Employee createEmployee(@Valid @RequestBody Employee employee) {
         employee.setId(sequenceGeneratorService.generateSequence(Employee.SEQUENCE_NAME));
         return employeeRepository.save(employee);
     }
 
-    @PutMapping("/employee/{id}")
+    @PutMapping("/employees/{id}")
     public ResponseEntity<Employee> updateEmployee(@PathVariable(value = "id") Long employeeId,
                                                    @Valid @RequestBody Employee employeeDetails)
             throws ResourceNotFoundException{
