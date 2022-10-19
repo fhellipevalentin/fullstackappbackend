@@ -23,15 +23,17 @@ public class Employee {
     private String name;
     private String email;
     private String phone;
+    private String department;
 
     public Employee() {
     }
 
-    public Employee(Long id, String name, String email, String phone) {
+    public Employee(Long id, String name, String email, String phone, String department) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
+        this.department = department;
     }
 
     public Long getId() {
@@ -66,6 +68,14 @@ public class Employee {
         this.phone = phone;
     }
 
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -73,6 +83,7 @@ public class Employee {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
+                ", department='" + department + '\'' +
                 '}';
     }
 }
