@@ -5,8 +5,11 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.annotation.Id;
 
+import javax.ejb.Local;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Document(collection = "Employee")
 public class Employee {
@@ -24,16 +27,18 @@ public class Employee {
     private String email;
     private String phone;
     private String department;
+    private LocalDateTime instant;
 
     public Employee() {
     }
 
-    public Employee(Long id, String name, String email, String phone, String department) {
+    public Employee(Long id, String name, String email, String phone, String department, LocalDateTime instant) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.department = department;
+        this.instant = instant;
     }
 
     public Long getId() {
@@ -76,6 +81,14 @@ public class Employee {
         this.department = department;
     }
 
+    public LocalDateTime getInstant() {
+        return instant;
+    }
+
+    public void setInstant(LocalDateTime instant) {
+        this.instant = instant;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -84,6 +97,7 @@ public class Employee {
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", department='" + department + '\'' +
+                ", instant=" + instant +
                 '}';
     }
 }
